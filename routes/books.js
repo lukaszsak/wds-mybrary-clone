@@ -102,7 +102,7 @@ router.get('/:id/edit', async (req, res) => {
   }
 })
 
-// Edit Book Route
+// Update Book Route
 router.put('/:id', async (req, res) => {
   // const book = new Book({
   //   title: req.body.title,
@@ -128,7 +128,7 @@ router.put('/:id', async (req, res) => {
     await book.save()
     res.redirect(`/books/${book.id}`)
   } catch {
-    if (book !== null){
+    if (book != null){
       renderEditPage(res, book, true)
     } else {
       res.redirect('/')
@@ -170,7 +170,7 @@ async function renderFormPage(res, book, form, hasError = false ) {
       authors: authors,
       book: book
     }
-    let errVerb = form == 'edit' ? 'Editing' : 'Creating'
+    let errVerb = form === 'edit' ? 'Editing' : 'Creating'
     if (hasError) params.errorMessage = `Error ${errVerb} Book`
     res.render(`books/${form}`, params)
   } catch {
